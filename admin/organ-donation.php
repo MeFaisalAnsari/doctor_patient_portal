@@ -24,7 +24,9 @@
                     <tr>
                         <th>#</th>
                         <th>Donor Name</th>
+                        <th>Email Address</th>
                         <th>Organ Type</th>
+                        <th>Location</th>
                         <th>Date</th>
                         <th>Delete</th>
                     </tr>
@@ -32,13 +34,15 @@
                 <tbody>
                     <?php
                     $i = 1;
-                    $query = mysqli_query($con, "SELECT organ_donation.*, patients.first_name, patients.last_name FROM organ_donation JOIN patients ON organ_donation.donor_id = patients.patient_id ORDER BY donation_date DESC");
+                    $query = mysqli_query($con, "SELECT organ_donation.*, patients.first_name, patients.last_name, patients.email FROM organ_donation JOIN patients ON organ_donation.donor_id = patients.patient_id ORDER BY donation_date DESC");
                     while ($row = mysqli_fetch_assoc($query)) {
                     ?>
                         <tr>
                             <td><?php echo $i ?></td>
                             <td><?php echo $row["first_name"] . " " . $row["last_name"] ?></td>
+                            <td><?php echo $row["email"] ?></td>
                             <td><?php echo $row["organ_type"] ?></td>
+                            <td><?php echo $row["location"] ?></td>
                             <td><?php echo date("d-m-Y", strtotime($row["donation_date"])) ?></td>
                             <td>
                                 <a href="#deleteOrganDonation<?php echo $row['organ_donation_id'] ?>" data-bs-toggle="modal"><i class="fa-solid fa-trash-can text-danger"></i></a>

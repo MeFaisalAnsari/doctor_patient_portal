@@ -16,7 +16,6 @@ if (isset($_POST["add-doctor"])) {
     $qualification = mysqli_real_escape_string($con, $_POST["qualification"]);
     $specialisation = mysqli_real_escape_string($con, $_POST["specialisation"]);
     $address = mysqli_real_escape_string($con, $_POST["address"]);
-    $status = 1;
 
     function randomPassword()
     {
@@ -32,7 +31,7 @@ if (isset($_POST["add-doctor"])) {
 
     $password = randomPassword();
 
-    $insert = mysqli_query($con, "INSERT INTO doctors (first_name, last_name, email, password, gender, dob, phone, address, qualification, specialisation, status) VALUES ('$first_name', '$last_name', '$email', '$password', '$gender', '$dob', '$phone', '$address', '$qualification', '$specialisation', '$status')");
+    $insert = mysqli_query($con, "INSERT INTO doctors (first_name, last_name, email, password, gender, dob, phone, address, qualification, specialisation) VALUES ('$first_name', '$last_name', '$email', '$password', '$gender', '$dob', '$phone', '$address', '$qualification', '$specialisation')");
     if ($insert) {
         $_SESSION["alert"] = "success";
         $_SESSION["msg"] = "Doctor added successfully !";
@@ -93,56 +92,6 @@ if (isset($_GET["delete-doctor"])) {
     } else {
         $_SESSION["alert"] = "danger";
         $_SESSION["msg"] = "Doctor could not be deleted !";
-    }
-    header("location:doctors");
-}
-
-
-// Approve doctor
-if (isset($_GET["approve-doctor"])) {
-    $_SESSION["msg"] = true;
-    $id = $_GET["approve-doctor"];
-
-    $approve = mysqli_query($con, "UPDATE doctors SET status = '1' WHERE doctor_id = '$id'");
-
-    $select = mysqli_query($con, "SELECT * FROM doctors WHERE doctor_id = '$id'");
-    $row = mysqli_fetch_assoc($select);
-    $first_name = $row["first_name"];
-    $last_name = $row["last_name"];
-    $email = $row["email"];
-    $password = $row["password"];
-
-    if ($approve) {
-        $_SESSION["alert"] = "success";
-        $_SESSION["msg"] = "Doctor approved successfully !";
-
-        $to = $email;
-        $subject = "Registration Successful - Doctor Patient Portal";
-        $message = "Dear Dr. " . $first_name . " " . $last_name . ", you have been successfully registered. These are your credentials." . "\r\n\n";
-        $message .= "Email Address: " . $email . "\r\n";
-        $message .= "Password: " . $password;
-        $headers = "From: Faisal Ansari <xamppfaisal@gmail.com>";
-        mail($to, $subject, $message, $headers);
-    } else {
-        $_SESSION["alert"] = "danger";
-        $_SESSION["msg"] = "Doctor could not be approved !";
-    }
-    header("location:doctors");
-}
-
-// Reject doctor
-if (isset($_GET["reject-doctor"])) {
-    $_SESSION["msg"] = true;
-    $id = $_GET["reject-doctor"];
-
-    $reject = mysqli_query($con, "DELETE FROM doctors WHERE doctor_id = '$id'");
-
-    if ($reject) {
-        $_SESSION["alert"] = "success";
-        $_SESSION["msg"] = "Doctor rejected successfully !";
-    } else {
-        $_SESSION["alert"] = "danger";
-        $_SESSION["msg"] = "Doctor could not be rejected !";
     }
     header("location:doctors");
 }

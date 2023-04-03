@@ -15,7 +15,7 @@
 </div>
 <div class="card shadow mb-4 mx-5">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">List of All Donors</h6>
+        <h6 class="m-0 font-weight-bold text-primary">List of Blood Donations</h6>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -24,7 +24,7 @@
                     <tr>
                         <th>#</th>
                         <th>Donor Name</th>
-                        <th>Blood Group</th>
+                        <th>Email Address</th>
                         <th>Location</th>
                         <th>Date</th>
                         <th>Delete</th>
@@ -33,13 +33,13 @@
                 <tbody>
                     <?php
                     $i = 1;
-                    $query = mysqli_query($con, "SELECT blood_donation.*, patients.first_name, patients.last_name FROM blood_donation JOIN patients ON blood_donation.donor_id = patients.patient_id ORDER BY donation_date DESC");
+                    $query = mysqli_query($con, "SELECT blood_donation.*, patients.first_name, patients.last_name, patients.email FROM blood_donation JOIN patients ON blood_donation.donor_id = patients.patient_id ORDER BY donation_date DESC");
                     while ($row = mysqli_fetch_assoc($query)) {
                     ?>
                         <tr>
                             <td><?php echo $i ?></td>
                             <td><?php echo $row["first_name"] . " " . $row["last_name"] ?></td>
-                            <td><?php echo $row["blood_group"] ?></td>
+                            <td><?php echo $row["email"] ?></td>
                             <td><?php echo $row["location"] ?></td>
                             <td><?php echo date("d-m-Y", strtotime($row["donation_date"])) ?></td>
                             <td>

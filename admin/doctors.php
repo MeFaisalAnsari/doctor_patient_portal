@@ -1,9 +1,4 @@
 <?php include("includes/header.php") ?>
-<?php
-// $_SESSION["msg"] = true;
-// $_SESSION["alert"] = "danger";
-// $_SESSION["msg"] = "this is alert message";
-?>
 
 <div class="container my-5 d-flex justify-content-between align-items-center">
     <h1><i class="fa-solid fa-user-doctor me-2"></i> Doctors</h1>
@@ -46,7 +41,7 @@
                 <tbody>
                     <?php
                     $i = 1;
-                    $query = mysqli_query($con, "SELECT * FROM doctors WHERE status = '1' ORDER BY doctor_id DESC");
+                    $query = mysqli_query($con, "SELECT * FROM doctors ORDER BY doctor_id DESC");
                     while ($row = mysqli_fetch_assoc($query)) {
                         $dob = $row["dob"];
                         $age = (date("Y") - date("Y", strtotime($dob)));
@@ -148,57 +143,6 @@
     </div>
 </div>
 
-<!-- <div class="card shadow mb-4 my-5 mx-5">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Doctors pending for Approval</h6>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered w-100 py-2 text-center">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Action</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Mobile No.</th>
-                        <th>Gender</th>
-                        <th>Age</th>
-                        <th>Qualifaction</th>
-                        <th>Specialisation</th>
-                        <th>Address</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $i = 1;
-                    $query = mysqli_query($con, "SELECT * FROM doctors WHERE status = '0' ORDER BY doctor_id DESC");
-                    while ($row = mysqli_fetch_assoc($query)) {
-                        $dob = $row["dob"];
-                        $age = (date("Y") - date("Y", strtotime($dob)));
-                    ?>
-                        <tr>
-                            <td><?php echo $i ?></td>
-                            <td class="d-flex flex-column" style="gap: 10px"><a href="code.php?approve-doctor=<?php echo $row['doctor_id'] ?>" class="btn btn-success">Approve</a> <a href="code.php?reject-doctor=<?php echo $row['doctor_id'] ?>" class="btn btn-danger">Reject</a></td>
-                            <td class="text-nowrap">Dr. <?php echo $row["first_name"] . " " . $row["last_name"] ?></td>
-                            <td><?php echo $row["email"] ?></td>
-                            <td><?php echo $row["phone"] ?></td>
-                            <td class="text-capitalize"><?php echo $row["gender"] ?></td>
-                            <td><?php echo $age ?></td>
-                            <td><?php echo $row["qualification"] ?></td>
-                            <td><?php echo $row["specialisation"] ?></td>
-                            <td><?php echo $row["address"] ?></td>
-                        </tr>
-                    <?php
-                        $i++;
-                    }
-                    ?>
-                </tbody>
-            </table>
-
-        </div>
-    </div>
-</div> -->
 <div class="modal fade" id="addDoctor" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
