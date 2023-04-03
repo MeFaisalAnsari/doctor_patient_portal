@@ -6,6 +6,16 @@
         Book New <i class="fa-solid fa-plus ms-2"></i>
     </button>
 </div>
+<div class="mx-5">
+    <?php if (isset($_SESSION["msg"]) && $_SESSION["msg"] == true) { ?>
+        <div class="alert alert-<?php echo $_SESSION["alert"] ?> alert-dismissible fade show" role="alert">
+            <?php echo $_SESSION["msg"] ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php }
+    $_SESSION["msg"] = false;
+    ?>
+</div>
 <div class="card shadow mb-4 mx-5">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">List of all Appointments</h6>
