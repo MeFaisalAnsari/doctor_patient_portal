@@ -69,13 +69,12 @@ if (isset($_POST["donate-blood"])) {
 
     $donor_id = $_POST["donor-id"];
     $donation_date = mysqli_real_escape_string($con, $_POST["donation-date"]);
-    $blood_group = mysqli_real_escape_string($con, $_POST["blood-group"]);
     $location = mysqli_real_escape_string($con, $_POST["location"]);
 
-    $insert = mysqli_query($con, "INSERT INTO blood_donation (donor_id, donation_date, blood_group, location) VALUES ('$donor_id', '$donation_date', '$blood_group', '$location')");
+    $insert = mysqli_query($con, "INSERT INTO blood_donation (donor_id, donation_date, location) VALUES ('$donor_id', '$donation_date', '$location')");
     if ($insert) {
         $_SESSION["alert"] = "success";
-        $_SESSION["msg"] = "Blood donation scheduled successfully. Kindly visit the selected location to donate blood";
+        $_SESSION["msg"] = "Blood donation scheduled successfully. Kindly visit " . $location . " on " . date("d-m-Y", strtotime($donation_date)) . " to donate blood";
     } else {
         $_SESSION["alert"] = "danger";
         $_SESSION["msg"] = "Sorry, Blood donation could not be scheduled !";

@@ -18,7 +18,7 @@
 </div>
 <div class="card shadow mb-4 mx-5">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">List of Blood Donated</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Your Blood Donation List</h6>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -26,8 +26,7 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Your Blood Group</th>
-                        <th>Donation Date</th>
+                        <th>Date</th>
                         <th>Location</th>
                     </tr>
                 </thead>
@@ -39,7 +38,6 @@
                     ?>
                         <tr>
                             <td><?php echo $i ?></td>
-                            <td><?php echo $row["blood_group"] ?></td>
                             <td><?php echo date("d-m-Y", strtotime($row["donation_date"])) ?></td>
                             <td><?php echo $row["location"] ?></td>
                         </tr>
@@ -70,17 +68,6 @@
                             <td><input type="date" name="donation-date" class="form-control" required></td>
                         </tr>
                     </table>
-                    <select class="form-control mt-3" name="blood-group" required>
-                        <option value="">-- Blood Group --</option>
-                        <option value="A+">A+</option>
-                        <option value="A-">A-</option>
-                        <option value="B+">B+</option>
-                        <option value="B-">B-</option>
-                        <option value="AB+">AB+</option>
-                        <option value="AB-">AB-</option>
-                        <option value="O+">O+</option>
-                        <option value="O-">O-</option>
-                    </select>
                     <select class="form-control mt-3" name="location" required>
                         <option value="">-- Select Location --</option>
                         <option value="Community Hospital">Community Hospital</option>
