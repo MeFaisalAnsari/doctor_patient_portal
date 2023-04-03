@@ -83,6 +83,27 @@ if (isset($_POST["donate-blood"])) {
     header("location:blood-donation");
 }
 
+// Donate Organ
+if (isset($_POST["donate-organ"])) {
+    $_SESSION["msg"] = true;
+
+    $donor_id = $_POST["donor-id"];
+    $organ_type = mysqli_real_escape_string($con, $_POST["organ-type"]);
+    $location = mysqli_real_escape_string($con, $_POST["location"]);
+    $donation_date = mysqli_real_escape_string($con, $_POST["donation-date"]);
+
+    $insert = mysqli_query($con, "INSERT INTO organ_donation (donor_id, organ_type, location, donation_date) VALUES ('$donor_id', '$organ_type', '$location', '$donation_date')");
+    if ($insert) {
+        $_SESSION["alert"] = "success";
+        $_SESSION["msg"] = "Organ donation scheduled successfully. Kindly visit " . $location . " on " . date("d-m-Y", strtotime($donation_date)) . " to donate " . $organ_type . ".";
+    } else {
+        $_SESSION["alert"] = "danger";
+        $_SESSION["msg"] = "Sorry, Organ donation could not be scheduled !";
+    }
+
+    header("location:organ-donation");
+}
+
 // Logout
 if (isset($_GET["logout"])) {
     session_unset();

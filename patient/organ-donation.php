@@ -18,7 +18,7 @@
 </div>
 <div class="card shadow mb-4 mx-5">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Organs Donated</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Your Organ Donations</h6>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -27,7 +27,7 @@
                     <tr>
                         <th>#</th>
                         <th>Organ Type</th>
-                        <th>Donation Date</th>
+                        <th>Date</th>
                         <th>Location</th>
                     </tr>
                 </thead>
@@ -54,7 +54,7 @@
     </div>
 </div>
 
-<!-- <div class="modal fade" id="donateOrgan" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="donateOrgan" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -70,7 +70,7 @@
                             <td><input type="date" name="donation-date" class="form-control" required></td>
                         </tr>
                     </table>
-                    <select class="form-control mt-3" name="organ-group" required>
+                    <select class="form-control mt-3" name="organ-type" required>
                         <option value="">-- Organ Type --</option>
                         <option value="Kidney">Kidney</option>
                         <option value="Heart">Heart</option>
@@ -82,9 +82,9 @@
                     <select class="form-control mt-3" name="location" required>
                         <option value="">-- Select Location --</option>
                         <option value="Community Hospital">Community Hospital</option>
-                        <option value="Red Cross Blood Center">Red Cross Blood Center</option>
+                        <option value="Red Cross Organ Center">Red Cross Organ Center</option>
                         <option value="City Medical Center">City Medical Center</option>
-                        <option value="Community Blood Drive">Community Blood Drive</option>
+                        <option value="Community Organ Drive">Community Organ Drive</option>
                     </select>
                 </div>
                 <div class="modal-footer">
@@ -94,6 +94,6 @@
             </form>
         </div>
     </div>
-</div> -->
+</div>
 
 <?php include("includes/footer.php") ?>
