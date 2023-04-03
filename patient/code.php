@@ -3,6 +3,43 @@
 include("../connection.php");
 session_start();
 
+// Signup
+if (isset($_POST["signup"])) {
+    $_SESSION["msg"] = true;
+
+    $first_name = mysqli_real_escape_string($con, $_POST["first-name"]);
+    $last_name = mysqli_real_escape_string($con, $_POST["last-name"]);
+    $email = mysqli_real_escape_string($con, $_POST["email"]);
+    $phone = mysqli_real_escape_string($con, $_POST["phone"]);
+    $dob = mysqli_real_escape_string($con, $_POST["dob"]);
+    $gender = mysqli_real_escape_string($con, $_POST["gender"]);
+    $address = mysqli_real_escape_string($con, $_POST["address"]);
+    $password = mysqli_real_escape_string($con, $_POST["password"]);
+
+    $select  = mysqli_query($con, "SELECT * FROM patients WHERE email = '$email'");
+    $count = mysqli_num_rows($select);
+
+    if ($count > 0) {
+        $_SESSION["alert"] = "warning";
+        $_SESSION["msg"] = "Email already exist! Please <a href='login'>login</a> to continue";
+        header("location:signup");
+        exit;
+    } else {
+        $insert = mysqli_query($con, "INSERT INTO patients (first_name, last_name, email, password, dob, gender, phone, address) VALUES ('$first_name', '$last_name', '$email', '$password', '$dob', '$gender', '$phone', '$address')");
+        if ($insert) {
+            $_SESSION["alert"] = "success";
+            $_SESSION["msg"] = "Account created successfully !";
+            header("location:login");
+            exit;
+        } else {
+            $_SESSION["alert"] = "danger";
+            $_SESSION["msg"] = "Sorry, something went wrong !";
+            header("location:signup");
+            exit;
+        }
+    }
+}
+
 // Book Appointment
 if (isset($_POST["book-appointment"])) {
     $_SESSION["msg"] = true;

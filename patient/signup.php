@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,10 +16,20 @@
 </head>
 
 <body>
+    <div class="mx-5 mt-5">
+        <?php if (isset($_SESSION["msg"]) && $_SESSION["msg"] == true) { ?>
+            <div class="alert alert-<?php echo $_SESSION["alert"] ?> alert-dismissible fade show" role="alert">
+                <?php echo $_SESSION["msg"] ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php }
+        $_SESSION["msg"] = false;
+        ?>
+    </div>
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
-        <div class="form-container shadow border px-4 pt-5 pb-3 rounded-3">
+        <div class="form-container shadow border mb-5 px-4 pt-5 pb-3 rounded-3">
             <h2 class="mb-4 text-center">Patient Registration</h2>
-            <form action="" method="POST">
+            <form action="code.php" method="POST">
                 <div class="row">
                     <div class="col">
                         <input type="text" name="first-name" class="form-control" placeholder="First Name" required>
@@ -37,11 +51,12 @@
                 <input type="number" name="phone" class="form-control mt-3" placeholder="Phone Number" required>
                 <textarea name="address" class="form-control mt-3" placeholder="Address" required></textarea>
                 <input type="password" name="password" class="form-control mt-3" placeholder="Create Password" required>
-                <button type="submit" name="login" class="btn btn-primary w-100 mt-3">Register</button>
+                <button type="submit" name="signup" class="btn btn-primary w-100 mt-3">Register</button>
             </form>
-            <p class="mt-3 text-center">ALready have an account? <a href="login">Login</a></p>
+            <p class="mt-3 text-center">Already have an account? <a href="login">Login</a></p>
         </div>
     </div>
+    <script src="../vendor/bootstrap/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

@@ -1,4 +1,6 @@
 <?php
+
+session_start();
 include("../connection.php");
 
 $error = false;
@@ -35,6 +37,14 @@ if (isset($_POST["login"])) {
 </head>
 
 <body>
+    <?php if (isset($_SESSION["msg"]) && $_SESSION["msg"] == true) { ?>
+        <div class="mx-5 mt-5 alert alert-<?php echo $_SESSION["alert"] ?> alert-dismissible fade show" role="alert">
+            <?php echo $_SESSION["msg"] ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php }
+    $_SESSION["msg"] = false;
+    ?>
     <div class="container d-flex justify-content-center align-items-center min-vh-100 text-center">
         <div class="form-container shadow-lg px-4 py-5 rounded-3">
             <h2 class="mb-4">Patient Login</h2>
@@ -48,13 +58,14 @@ if (isset($_POST["login"])) {
                     <input type="password" name="password" class="form-control" placeholder="Password" required>
                 </div>
                 <?php if ($error) { ?>
-                <small class="text-danger d-inline-block mb-3">Wrong Email or Password !</small>
+                    <small class="text-danger d-inline-block mb-3">Wrong Email or Password !</small>
                 <?php } ?>
                 <button type="submit" name="login" class="btn btn-primary w-100">Login</button>
             </form>
             <p class="mt-3">Don't have an account? <a href="signup">Signup</a></p>
         </div>
     </div>
+    <script src="../vendor/bootstrap/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
