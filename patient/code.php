@@ -104,6 +104,32 @@ if (isset($_POST["donate-organ"])) {
     header("location:organ-donation");
 }
 
+// Edit Profile
+if (isset($_POST["update-patient"])) {
+    $_SESSION["msg"] = true;
+
+    $id = $_POST["patient-id"];
+    $first_name = mysqli_real_escape_string($con, $_POST["first-name"]);
+    $last_name = mysqli_real_escape_string($con, $_POST["last-name"]);
+    $email = mysqli_real_escape_string($con, $_POST["email"]);
+    $phone = mysqli_real_escape_string($con, $_POST["phone"]);
+    $gender = mysqli_real_escape_string($con, $_POST["gender"]);
+    $dob = mysqli_real_escape_string($con, $_POST["dob"]);
+    $address = mysqli_real_escape_string($con, $_POST["address"]);
+
+    $update = mysqli_query($con, "UPDATE patients SET first_name = '$first_name', last_name = '$last_name', email = '$email', phone = '$phone', gender = '$gender', dob = '$dob', address = '$address' WHERE patient_id = '$id'");
+
+    if ($update) {
+        $_SESSION["alert"] = "success";
+        $_SESSION["msg"] = "Profile updated successfully !";
+    } else {
+        $_SESSION["alert"] = "danger";
+        $_SESSION["msg"] = "Profile could not be updated !";
+    }
+
+    header("location:profile");
+}
+
 // Logout
 if (isset($_GET["logout"])) {
     session_unset();
