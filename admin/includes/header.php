@@ -40,6 +40,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true || $_SESSION[
             <li><a class="btn btn-light" href="organ-donation"><i class="fa-solid fa-hand-holding-medical me-2"></i>
                     Organ Donation</a>
             </li>
+            <li><a class="btn btn-light" href="blood-bank"><i class="fa-solid fa-droplet me-2"></i>
+                    Blood Bank</a>
+            </li>
+            <li><a class="btn btn-light" href="organ-bank"><i class="fa-solid fa-lungs me-2"></i>
+                    Organ Bank</a>
+            </li>
         </ul>
     </header>
     <div class="bg-primary-subtle py-2 px-4 d-flex justify-content-between align-items-center border-bottom border-3 border-dark shadow">
