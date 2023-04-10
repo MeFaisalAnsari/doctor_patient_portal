@@ -1,4 +1,7 @@
-<?php include("includes/header.php") ?>
+<?php
+include("includes/header.php");
+$doctor_name = $row["first_name"] . " " . $row["last_name"];
+?>
 
 <div class="container my-5 d-flex justify-content-between align-items-center">
     <h1><i class="fa-solid fa-calendar-days me-2"></i> Appointments</h1>
@@ -13,6 +16,7 @@
     $_SESSION["msg"] = false;
     ?>
 </div>
+
 <div class="card shadow mb-4 mx-5">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">List of Scheduled Appointments</h6>
@@ -135,7 +139,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                                            <a href="code.php?cancel-appointment=<?php echo $appointment_id ?>" class="btn btn-danger">Yes</a>
+                                            <a href="code.php?cancel-appointment=<?php echo $appointment_id ?>&patient-id=<?php echo $patient_id ?>&doctor=<?php echo $doctor_name ?>" class="btn btn-danger">Yes</a>
                                         </div>
                                     </div>
                                 </div>

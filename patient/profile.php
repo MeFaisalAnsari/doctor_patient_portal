@@ -3,7 +3,7 @@
 <div class="container my-5 d-flex justify-content-between align-items-center">
     <h1><i class="fa-solid fa-user me-2"></i> My Profile</h1>
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProfile">
-        Edit <i class="fa-solid fa-pencil ms-2"></i>
+        Edit <i class="fa-solid fa-edit ms-2"></i>
     </button>
 </div>
 <div class="modal fade" id="editProfile" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

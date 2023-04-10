@@ -35,12 +35,26 @@ if (isset($_POST["complete-appointment"])) {
 if (isset($_GET["cancel-appointment"])) {
     $_SESSION["msg"] = true;
     $id = $_GET["cancel-appointment"];
+    $patient_id = $_GET["patient-id"];
+    $doctor_name = $_GET["doctor"];
 
     $update = mysqli_query($con, "UPDATE appointments SET appointment_status = 'cancelled' WHERE appointment_id = '$id'");
 
     if ($update) {
         $_SESSION["alert"] = "success";
         $_SESSION["msg"] = "Appointment cancelled successfully !";
+
+        $select = mysqli_query($con, "SELECT * FROM patients WHERE patient_id = '$patient_id'");
+        $row = mysqli_fetch_assoc($select);
+
+        $patient_name = $row["first_name"] . " " . $row["last_name"];
+        $patient_email = $row["email"];
+
+        $to = $patient_email;
+        $subject = "Appointment Cancelled - Doctor Patient Portal";
+        $message = "Dear " . $patient_name . ", your appointment with Dr. " . $doctor_name . " is cancelled due to some reason, please try to book again." . "\r\n\n";
+        $headers = "From: Faisal Ansari <xamppfaisal@gmail.com>\r\n";
+        mail($to, $subject, $message, $headers);
     } else {
         $_SESSION["alert"] = "danger";
         $_SESSION["msg"] = "Appointment could not be cancellled !";

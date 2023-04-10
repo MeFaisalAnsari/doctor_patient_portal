@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 03, 2023 at 11:33 AM
+-- Generation Time: Apr 04, 2023 at 01:35 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -65,7 +65,9 @@ INSERT INTO `appointments` (`appointment_id`, `patient_id`, `doctor_id`, `appoin
 (5, 4, 9, '2023-03-16', '12:30:00', 'Breathing Problem', 'completed'),
 (6, 5, 9, '2023-03-16', '13:00:00', 'Headache, vomiting', 'completed'),
 (7, 1, 9, '2023-03-17', '09:00:00', 'Regular Chekup', 'scheduled'),
-(8, 1, 14, '2023-03-17', '09:00:00', 'Fever', 'completed');
+(8, 1, 14, '2023-03-17', '09:00:00', 'Fever', 'completed'),
+(9, 7, 6, '2023-04-05', '04:02:00', 'Regular Checkup', 'scheduled'),
+(10, 7, 5, '2023-04-06', '02:03:00', 'fgafaew', 'scheduled');
 
 -- --------------------------------------------------------
 
@@ -86,11 +88,12 @@ CREATE TABLE `blood_bank` (
 --
 
 INSERT INTO `blood_bank` (`blood_bank_id`, `blood_type`, `quantity`, `expiry_date`, `location`) VALUES
-(1, 'A+', 50, '2023-03-31', 'Community Hospital'),
+(1, 'A+', 40, '2023-03-31', 'Community Hospital'),
 (2, 'B+', 25, '2023-04-15', 'Red Cross Blood Center'),
-(3, 'O-', 10, '2023-03-20', 'City Medical Center'),
+(3, 'O-', 20, '2023-03-20', 'City Medical Center'),
 (4, 'AB+', 30, '2023-05-01', 'Community Blood Drive'),
-(5, 'A-', 20, '2023-03-31', 'Red Cross Blood Center');
+(6, 'AB-', 60, '2024-06-04', 'Red Cross Blood Center'),
+(7, 'O+', 25, '2023-04-14', 'Community Hospital');
 
 -- --------------------------------------------------------
 
@@ -101,7 +104,6 @@ INSERT INTO `blood_bank` (`blood_bank_id`, `blood_type`, `quantity`, `expiry_dat
 CREATE TABLE `blood_donation` (
   `blood_donation_id` int(11) NOT NULL,
   `donor_id` int(11) NOT NULL,
-  `blood_group` varchar(255) NOT NULL,
   `location` varchar(255) NOT NULL,
   `donation_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -110,10 +112,13 @@ CREATE TABLE `blood_donation` (
 -- Dumping data for table `blood_donation`
 --
 
-INSERT INTO `blood_donation` (`blood_donation_id`, `donor_id`, `blood_group`, `location`, `donation_date`) VALUES
-(1, 1, 'A+', 'Community Hospital', '2023-03-01'),
-(3, 2, 'O+', 'Community Blood Drive', '2023-02-20'),
-(4, 2, 'O+', 'City Medical Center', '2023-03-24');
+INSERT INTO `blood_donation` (`blood_donation_id`, `donor_id`, `location`, `donation_date`) VALUES
+(1, 1, 'Community Hospital', '2023-03-01'),
+(3, 2, 'Community Blood Drive', '2023-02-20'),
+(4, 2, 'City Medical Center', '2023-03-24'),
+(5, 7, 'Red Cross Blood Center', '2023-04-07'),
+(6, 7, 'City Medical Center', '2023-04-06'),
+(8, 7, 'Community Blood Drive', '2023-04-30');
 
 -- --------------------------------------------------------
 
@@ -133,7 +138,6 @@ CREATE TABLE `doctors` (
   `address` varchar(255) NOT NULL,
   `qualification` varchar(255) NOT NULL,
   `specialisation` varchar(255) NOT NULL,
-  `status` int(11) NOT NULL,
   `dt` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -141,14 +145,14 @@ CREATE TABLE `doctors` (
 -- Dumping data for table `doctors`
 --
 
-INSERT INTO `doctors` (`doctor_id`, `first_name`, `last_name`, `email`, `password`, `gender`, `dob`, `phone`, `address`, `qualification`, `specialisation`, `status`, `dt`) VALUES
-(4, 'John', 'Smith', 'john.smith@example.com', '7h@kP9X&6jC', 'Male', '1985-05-10', '1234567890', '123 Main St, Anytown, USA', 'MD', 'Cardiology', 1, '2023-03-14 01:06:48'),
-(5, 'Sarah', 'Lee', 'sarah.lee@example.com', 'uEd6HD9b', 'female', '1978-11-22', '1234567890', '456 Maple Ave, Anytown, USA', 'DDS', 'Dentistry', 1, '2023-03-14 01:11:18'),
-(6, 'Muhammad', 'Ali', 'muhammad.ali@example.com', '9MzRFJjk', 'male', '1990-07-15', '1234567890', '789 Oak St, Anytown, USA', 'MBBS, MD', 'Oncology', 1, '2023-03-14 01:13:32'),
-(7, 'William', 'Kim', 'william.kim@example.com', 'uTPCXT4e', 'male', '1975-09-12', '1234567890', '789 Main St, Anytown, USA', 'DVM', 'Veterinary Medicine', 1, '2023-03-14 01:15:07'),
-(8, 'Emily', 'Chen', 'emily.chen@example.com', 'IZgSx49k', 'female', '1988-12-08', '1234567890', '222 Oak St, Anytown, USA', 'MD, MPH', 'Public Health', 1, '2023-03-14 01:16:21'),
-(9, 'David', 'Garcia', 'david.garcia@example.com', 'CWFxis5n', 'male', '1995-02-08', '1234567890', '777 Main St, Anytown, USA', 'DO', 'Family Medicine', 1, '2023-03-14 01:17:50'),
-(14, 'Anmol', 'Dwivedi', 'anmoldwivedi722@gmail.com', 'Q0Oy35et', 'male', '2002-02-12', '65465151', 'ergwerg', 'Bsc', 'refewre xf', 1, '2023-03-16 14:24:05');
+INSERT INTO `doctors` (`doctor_id`, `first_name`, `last_name`, `email`, `password`, `gender`, `dob`, `phone`, `address`, `qualification`, `specialisation`, `dt`) VALUES
+(4, 'John', 'Smith', 'john.smith@example.com', '7h@kP9X&6jC', 'Male', '1985-05-10', '1234567890', '123 Main St, Anytown, USA', 'MD', 'Cardiology', '2023-03-14 01:06:48'),
+(5, 'Sarah', 'Lee', 'sarah.lee@example.com', 'uEd6HD9b', 'female', '1978-11-22', '1234567890', '456 Maple Ave, Anytown, USA', 'DDS', 'Dentistry', '2023-03-14 01:11:18'),
+(6, 'Muhammad', 'Ali', 'muhammad.ali@example.com', '9MzRFJjk', 'male', '1990-07-15', '1234567890', '789 Oak St, Anytown, USA', 'MBBS, MD', 'Oncology', '2023-03-14 01:13:32'),
+(7, 'William', 'Kim', 'william.kim@example.com', 'uTPCXT4e', 'male', '1975-09-12', '1234567890', '789 Main St, Anytown, USA', 'DVM', 'Veterinary Medicine', '2023-03-14 01:15:07'),
+(8, 'Emily', 'Chen', 'emily.chen@example.com', 'IZgSx49k', 'female', '1988-12-08', '1234567890', '222 Oak St, Anytown, USA', 'MD, MPH', 'Public Health', '2023-03-14 01:16:21'),
+(9, 'David', 'Garcia', 'david.garcia@example.com', 'CWFxis5n', 'male', '1995-02-08', '1234567890', '777 Main St, Anytown, USA', 'DO', 'Family Medicine', '2023-03-14 01:17:50'),
+(14, 'Anmol', 'Dwivedi', 'anmoldwivedi722@gmail.com', 'Q0Oy35et', 'male', '2002-02-12', '65465151', 'ergwerg', 'Bsc', 'refewre xf', '2023-03-16 14:24:05');
 
 -- --------------------------------------------------------
 
@@ -219,6 +223,15 @@ CREATE TABLE `organ_donation` (
   `donation_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `organ_donation`
+--
+
+INSERT INTO `organ_donation` (`organ_donation_id`, `donor_id`, `organ_type`, `location`, `donation_date`) VALUES
+(1, 7, 'Heart', 'Red Cross Organ Center', '2023-04-05'),
+(2, 7, 'Lungs', 'City Medical Center', '2023-04-13'),
+(3, 7, 'Kidney', 'Community Hospital', '2023-04-06');
+
 -- --------------------------------------------------------
 
 --
@@ -247,7 +260,8 @@ INSERT INTO `patients` (`patient_id`, `first_name`, `last_name`, `email`, `passw
 (2, 'Bob', 'Smith', 'bob.smith@example.com', 'MyPwd456', '1985-09-10', 'male', '1234567890', '456 Maple Ave, Anytown, USA', '2023-03-14 02:52:17'),
 (3, 'Charlie', 'Lee', 'charlie.lee@example.com', 'Secret123', '2000-01-05', 'male', '1234567890', '789 Oak St, Anytown, USA', '2023-03-14 02:57:05'),
 (4, 'Emma', 'Davis', 'emma.davis@example.com', 'Password!', '1982-03-20', 'female', '1234567890', '10 Elm St, Anytown, USA', '2023-03-14 02:58:43'),
-(5, 'Michael', 'Brown', 'michael.brown@example.com', 'mypwd123', '1994-08-12', 'male', '1234567890', '555 Oak St, Anytown, USA', '2023-03-14 03:01:09');
+(5, 'Michael', 'Brown', 'michael.brown@example.com', 'mypwd123', '1994-08-12', 'male', '1234567890', '555 Oak St, Anytown, USA', '2023-03-14 03:01:09'),
+(7, 'Faisal', 'Ansari', 'whatfaisal12ka4@gmail.com', '123456', '2002-07-05', 'male', '9881415480', 'Gaibi Nagar, Bhiwandi', '2023-04-03 20:29:37');
 
 --
 -- Indexes for dumped tables
@@ -321,19 +335,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `appointment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `appointment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `blood_bank`
 --
 ALTER TABLE `blood_bank`
-  MODIFY `blood_bank_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `blood_bank_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `blood_donation`
 --
 ALTER TABLE `blood_donation`
-  MODIFY `blood_donation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `blood_donation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `doctors`
@@ -351,19 +365,19 @@ ALTER TABLE `medical_history`
 -- AUTO_INCREMENT for table `organ_bank`
 --
 ALTER TABLE `organ_bank`
-  MODIFY `organ_bank_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `organ_bank_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `organ_donation`
 --
 ALTER TABLE `organ_donation`
-  MODIFY `organ_donation_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `organ_donation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `patients`
 --
 ALTER TABLE `patients`
-  MODIFY `patient_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `patient_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
