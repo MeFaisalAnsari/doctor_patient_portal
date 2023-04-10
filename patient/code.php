@@ -46,6 +46,9 @@ if (isset($_POST["book-appointment"])) {
 
     $patient_id = $_POST["patient-id"];
     $doctor_id = $_POST["doctor-id"];
+    $patient_name = $_POST["patient-name"];
+    $patient_email = $_POST["patient-email"];
+
     $appointment_date = mysqli_real_escape_string($con, $_POST["appointment-date"]);
     $appointment_time = mysqli_real_escape_string($con, $_POST["appointment-time"]);
     $appointment_reason = mysqli_real_escape_string($con, $_POST["appointment-reason"]);
@@ -55,6 +58,16 @@ if (isset($_POST["book-appointment"])) {
     if ($insert) {
         $_SESSION["alert"] = "success";
         $_SESSION["msg"] = "Appointment Scheduled successfully !";
+
+        $select = mysqli_query($con, "SELECT * FROM doctors WHERE doctor_id = '$doctor_id'");
+        $row = mysqli_fetch_assoc($select);
+        $doctor_name = $row["first_name"] . " " . $row["last_name"];
+
+        $to = $patient_email;
+        $subject = "Appointment Scheduled - Doctor Patient Portal";
+        $message = "Dear " . $patient_name . ", your appointment with Dr. " . $doctor_name . " on " . date("d-m-Y", strtotime($appointment_date)) . " " . $appointment_time . " is scheduled successfully.";
+        $headers = "From: Faisal Ansari <xamppfaisal@gmail.com>";
+        mail($to, $subject, $message, $headers);
     } else {
         $_SESSION["alert"] = "danger";
         $_SESSION["msg"] = "Sorry, Appoinment could not be scheduled !";

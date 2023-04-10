@@ -1,4 +1,9 @@
-<?php include("includes/header.php") ?>
+<?php
+include("includes/header.php");
+
+$patient_name = $row["first_name"] . " " . $row["last_name"];
+$patient_email = $row["email"];
+?>
 
 <div class="container my-5 d-flex justify-content-between align-items-center">
     <h1><i class="fa-solid fa-calendar-days me-2"></i> Appointments</h1>
@@ -79,6 +84,8 @@
             <form action="code.php" method="POST">
                 <div class="modal-body">
                     <input type="hidden" name="patient-id" value="<?php echo $patient_id ?>">
+                    <input type="hidden" name="patient-name" value="<?php echo $patient_name ?>">
+                    <input type="hidden" name="patient-email" value="<?php echo $patient_email ?>">
                     <table class="w-100">
                         <select class="form-control mb-3" name="doctor-id" required>
                             <option value="">-- Select Doctor --</option>
