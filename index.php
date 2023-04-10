@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
   <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
   <link rel="stylesheet" href="style.css" />
+  <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
   <title>Doctor Patient Portal</title>
 </head>
 

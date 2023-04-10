@@ -33,6 +33,7 @@ if (isset($_POST["login"])) {
     <title>Patient Login - Doctor Patient Portal</title>
     <link rel="stylesheet" href="../vendor/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="../vendor/fontawesome/css/all.min.css">
+    <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="../style.css">
 </head>
 

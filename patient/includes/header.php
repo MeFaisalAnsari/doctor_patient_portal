@@ -23,6 +23,7 @@ $row = mysqli_fetch_assoc($query);
     <link rel="stylesheet" href="../vendor/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="../vendor/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="../vendor/datatables/dataTables.bootstrap5.min.css">
+    <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="../admin-panel.css">
 </head>
 

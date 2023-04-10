@@ -19,6 +19,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true || $_SESSION[
     <link rel="stylesheet" href="../vendor/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="../vendor/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="../vendor/datatables/dataTables.bootstrap5.min.css">
+    <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="../admin-panel.css">
 </head>
 
